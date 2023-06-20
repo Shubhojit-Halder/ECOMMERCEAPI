@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const userRoute = require("./routes/UserRoute");
 const authRoute = require("./routes/Auth");
 const productRoute = require("./routes/ProductRoute");
+const cartRoute = require("./routes/CartRoute");
+const orderRoute = require("./routes/OrderRoute");
 
 dotenv.config();
 
@@ -19,9 +21,11 @@ mongoose
   });
 
 app.use(express.json());
-app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
+app.use("/api/cart", cartRoute);
+app.use("/api/order", orderRoute);
 
 app.listen(port, () => {
   console.log(`Server is running in port ${port}`);

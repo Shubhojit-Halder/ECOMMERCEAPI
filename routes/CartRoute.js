@@ -10,7 +10,7 @@ router.post("/", verifyToken, async (req, res) => {
     const savedCart = await newCart.save();
     res.status(200).send(savedCart);
   } catch (error) {
-    res.status(500).send(err);
+    res.status(500).send(error);
   }
 });
 

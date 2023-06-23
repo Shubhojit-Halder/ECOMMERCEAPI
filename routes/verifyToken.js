@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.token;
   //authHeader is sent as "AuthHeader JWTtoken" so spliting it to get the token only

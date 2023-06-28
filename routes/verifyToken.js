@@ -1,18 +1,19 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.token;
+  // const authHeader = req.headers.token;
+  const authHeader = req.body.token;
   //authHeader is sent as "AuthHeader JWTtoken" so spliting it to get the token only
-  const token = authHeader.split(" ")[1];
-
+  // const token = authHeader.split(" ")[1];
+console.log("auth",authHeader);
   if (authHeader) {
-    jwt.verify(token, process.env.JWT_PASSKEY, (err, user) => {
+    jwt.verify(authHeader, process.env.JWT_PASSKEY, (err, user) => {
       if (err) res.status(403).json("Token isn't valid");
       req.user = user;
       next();
     });
   } else {
-    return res.status(401).json("User not authenticated");
+    return res.status(401).json("User not authenticated fuck you");
   }
 };
 //This middleware will be used to authenticate any user

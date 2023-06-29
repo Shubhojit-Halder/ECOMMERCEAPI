@@ -61,7 +61,7 @@ router.get("/", async (req, res) => {
         .sort({
           createdAt: -1,
         })
-        .limit(1);
+        .limit(8);
     } else if (category) {
       products = await Product.find({
         categories:{

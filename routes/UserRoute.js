@@ -38,7 +38,7 @@ router.delete("/:id", verifyAndAuthorization, async (req, res) => {
 });
 
 //GET USER
-router.get("/find/:id", verifyAdmin, async (req, res) => {
+router.post("/find/:id", verifyAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     res.status(200).json(user);
@@ -48,7 +48,7 @@ router.get("/find/:id", verifyAdmin, async (req, res) => {
 });
 
 //GET ALL USERS
-router.get("/", verifyAdmin, async (req, res) => {
+router.post("/", verifyAdmin, async (req, res) => {
   try {
     const query = req.query.new;
     const users = query
@@ -61,7 +61,7 @@ router.get("/", verifyAdmin, async (req, res) => {
 });
 
 //GET USER STATS
-router.get("/stats", verifyAdmin, async (req, res) => {
+router.post("/stats", verifyAdmin, async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
   try {

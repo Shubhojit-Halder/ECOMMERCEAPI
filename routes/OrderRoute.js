@@ -14,11 +14,11 @@ router.post("/", verifyAndAuthorization, async (req, res) => {
     const savedOrder = await newOrder.save();
     res.status(200).send(savedOrder);
   } catch (error) {
-    res.status(500).send(err);
+    res.status(500).send(error);
   }
 });
 
-//UPDATE Product
+//UPDATE order
 router.put("/:id", verifyAdmin, async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
@@ -54,8 +54,18 @@ router.get("/find/:userId", verifyAndAuthorization, async (req, res) => {
   }
 });
 
+//Get single order 
+router.post("/:id",verifyAndAuthorization,async(req,res)=>{
+  try {
+    const order = await Order.findById(req.params.id);
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+})
+
 //GET ALL
-router.get("/", verifyAdmin, async (req, res) => {
+router.post("/get/all", verifyAdmin, async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
@@ -64,8 +74,9 @@ router.get("/", verifyAdmin, async (req, res) => {
   }
 });
 
+
 //Get MONTHLY INCOME
-router.get("/income", verifyAdmin, async (req, res) => {
+router.post("/monthly/income",verifyAdmin, async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const lastTolastMonth = new Date(lastMonth.setMonth(lastMonth.getMonth() - 1));
@@ -85,9 +96,9 @@ router.get("/income", verifyAdmin, async (req, res) => {
         },
       },
     ]);
-    res.status(200).json(income);
+    res.status(200).send(income);
   } catch (error) {
-    res.status(501).json(error);
+    res.status(502).json(error);
   }
 });
 

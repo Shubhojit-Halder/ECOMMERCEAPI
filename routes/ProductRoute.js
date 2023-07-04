@@ -5,12 +5,12 @@ const router = require("express").Router();
 
 //CREATE
 router.post("/", verifyAdmin, async (req, res) => {
-  const newProduct = new Product(req.body);
+  const newProduct = new Product(req.body.productData);
   try {
     const savedProduct = await newProduct.save();
     res.status(200).send(savedProduct);
   } catch (error) {
-    res.status(500).send(err);
+    res.status(500).send(error);
   }
 });
 
@@ -20,7 +20,7 @@ router.put("/:id", verifyAdmin, async (req, res) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        $set: req.body.productData,
       },
       { new: true }
     );
@@ -31,7 +31,7 @@ router.put("/:id", verifyAdmin, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyAdmin, async (req, res) => {
+router.post("/delete/:id", verifyAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted");

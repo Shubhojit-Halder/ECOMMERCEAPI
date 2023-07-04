@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   const authHeader = req.body.token;
   //authHeader is sent as "AuthHeader JWTtoken" so spliting it to get the token only
   // const token = authHeader.split(" ")[1];
-console.log("auth",authHeader);
+// console.log("auth",authHeader);
   if (authHeader) {
     jwt.verify(authHeader, process.env.JWT_PASSKEY, (err, user) => {
       if (err) res.status(403).json("Token isn't valid");

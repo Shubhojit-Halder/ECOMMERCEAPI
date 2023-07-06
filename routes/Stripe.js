@@ -81,8 +81,8 @@ router.post("/payment", async (req, res) => {
     line_items,
     customer: customer.id,
     mode: "payment",
-    success_url: "http://localhost:5173/successful",
-    cancel_url: "http://localhost:5173/cart",
+    success_url: "http://localhost:5174/successful",
+    cancel_url: "http://localhost:5174/cart",
   });
   res.send({ url: session.url });
 });

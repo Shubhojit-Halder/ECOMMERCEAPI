@@ -81,8 +81,8 @@ router.post("/payment", async (req, res) => {
     line_items,
     customer: customer.id,
     mode: "payment",
-    success_url: "https://halder.web.app/successful",
-    cancel_url: "https://halder.web.app/cart",
+    success_url: "http://localhost:5173/successful",
+    cancel_url: "https://localhost:5173/cart",
   });
   res.send({ url: session.url });
 });
